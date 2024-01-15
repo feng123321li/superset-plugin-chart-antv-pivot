@@ -19,7 +19,8 @@ export default function SupersetPluginChartLiquid(props: SupersetPluginChartAntv
         colSubTotals,
         totalData,
         rowTotalsRename,
-        colTotalsRename
+        colTotalsRename,
+        sortParams
     } = props;
 
 
@@ -32,7 +33,8 @@ export default function SupersetPluginChartLiquid(props: SupersetPluginChartAntv
                     fields: fields,
                     meta: meta,
                     data,
-                    totalData: totalData
+                    totalData: totalData,
+                    sortParams:sortParams,
                 };
 
                 const s2Options = {

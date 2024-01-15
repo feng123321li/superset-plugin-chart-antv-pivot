@@ -20,12 +20,15 @@ import {
   ensureIsArray,
   smartDateFormatter,
   t,
+  QueryFormColumn,
+  QueryMode,
   validateNonEmpty
 } from '@superset-ui/core';
 
 import {
   ControlPanelConfig,
-  ControlSubSectionHeader,
+  ControlStateMapping,
+  ControlPanelsContainerProps,
   D3_TIME_FORMAT_OPTIONS,
   sections,
   sharedControls,
@@ -147,6 +150,23 @@ const config: ControlPanelConfig = {
           },
         ],
         ['adhoc_filters'],
+        [
+          {
+            name: 'order_by_cols',
+            config: {
+              type: 'SelectControl',
+              label: t('Ordering'),
+              description: t('Order results by selected columns'),
+              multi: true,
+              default: [],
+              mapStateToProps: ({ datasource }) => ({
+                choices: datasource?.hasOwnProperty('order_by_choices')
+                    ? (datasource as Dataset)?.order_by_choices
+                    : datasource?.columns || [],
+              }),
+            },
+          },
+        ],
         [
           {
             name: 'row_limit',

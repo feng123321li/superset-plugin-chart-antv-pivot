@@ -80,6 +80,7 @@ export default function transformProps(chartProps: ChartProps) {
         colSubTotals,
         rowTotalsRename,
         colTotalsRename,
+        orderByCols,
         transposePivot,
     } = formData;
 
@@ -130,9 +131,6 @@ export default function transformProps(chartProps: ChartProps) {
         field,
         name,
     }));
-
-
-    console.log('meta is', meta);
 
     //获取日期字段
     const dateFormatters = colnames
@@ -251,6 +249,15 @@ export default function transformProps(chartProps: ChartProps) {
     // console.log('totalData is', totalData);
 
 
+    //排序
+    const sortParams = orderByCols.map(orderByCol => {
+        const [sortFieldId, isAscending] = JSON.parse(orderByCol.replace(/'/g, '"'));
+        const sortMethod = isAscending ? 'ASC' : 'DESC';
+
+        return { sortFieldId, sortMethod };
+    });
+
+
     return {
         width,
         height,
@@ -266,6 +273,7 @@ export default function transformProps(chartProps: ChartProps) {
         colSubTotals,
         totalData,
         rowTotalsRename,
-        colTotalsRename
+        colTotalsRename,
+        sortParams
     };
 }

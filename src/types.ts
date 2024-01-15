@@ -60,5 +60,6 @@ export type SupersetPluginChartAntvPivotProps = SupersetPluginChartAntvPivotStyl
     colSubTotals: boolean,
     totalData: [],
     rowTotalsRename: string,
-    colTotalsRename: string
+    colTotalsRename: string,
+    sortParams: [],
   };
